@@ -10,9 +10,11 @@ public class Checkout
     public int MaterialTypeId { get; set; }
     public MaterialType MaterialType { get; set; }
     [Required]
-    public string PatronId { get; set; }
+    public int PatronId { get; set; }
+    public Patron Patron { get; set; }
     [Required]
     public DateTime? CheckoutDate { get; set; }
     [Required]
-    public DateTime ReturnDate { get; set; }  
-}
+
+    public DateTime? ReturnDate { get; set; }  
+} 

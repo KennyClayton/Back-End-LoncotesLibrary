@@ -26,7 +26,16 @@ public class LoncotesLibraryDbContext : DbContext // this is a subclass because 
             //* HasData - this method is from Entity Framework Core and it allows us to seed data for a database when we are initalizing or migrating a database
         modelBuilder.Entity<Checkout>().HasData(new Checkout[]
         {
-
+            new Checkout { Id = 1, MaterialId = 1, MaterialTypeId = 1, PatronId = 1, CheckoutDate = new DateTime(2023, 09, 25), ReturnDate = null },
+            new Checkout { Id = 2, MaterialId = 2, MaterialTypeId = 2, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-4)), ReturnDate = null },
+            new Checkout { Id = 3, MaterialId = 3, MaterialTypeId = 3, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-3)), ReturnDate = null },
+            new Checkout { Id = 4, MaterialId = 4, MaterialTypeId = 1, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-71)), ReturnDate = null },
+            new Checkout { Id = 5, MaterialId = 5, MaterialTypeId = 2, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-15)), ReturnDate = null },
+            new Checkout { Id = 6, MaterialId = 6, MaterialTypeId = 3, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-91)), ReturnDate = null },
+            new Checkout { Id = 7, MaterialId = 7, MaterialTypeId = 1, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-5)), ReturnDate = null },
+            new Checkout { Id = 8, MaterialId = 8, MaterialTypeId = 2, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-3)), ReturnDate = null },
+            new Checkout { Id = 9, MaterialId = 9, MaterialTypeId = 3, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-5)), ReturnDate = null },
+            new Checkout { Id = 10, MaterialId = 10, MaterialTypeId = 1, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-16)), ReturnDate = DateTime.Now },
         });
 
         //^ GENRE
