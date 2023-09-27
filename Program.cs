@@ -219,7 +219,7 @@ app.MapPost("/api/patrons/{patronId}/checkouts", (LoncotesLibraryDbContext db, i
 {
     //This variable holds a single patron instance of the Librarian's choosing (example, patron 4)
     Patron patronToUpdate = db.Patrons.FirstOrDefault(p => p.Id == patronId);
-    if (patronToUpdate == null) 
+    if (patronToUpdate == null)
     {
         return Results.NotFound();
     }
@@ -272,6 +272,23 @@ app.MapPut("/api/checkouts/return/{id}", (LoncotesLibraryDbContext db, int id) =
     return Results.NoContent();
 });
 
+
+
+//^ ENDPOINT - Get overdue checkouts
+app.MapGet("/api/checkouts/overdue", (LoncotesLibraryDbContext db) => // "This part of the code is an inline lambda function that takes an instance of LoncotesLibraryDbContext as a parameter. It uses this database context to query the database."
+{
+    return db.Checkouts //query the checkouts table using the db context we passed as a parameter
+    .Include(p => p.Patron) //this gives us a list of all patrons with checkouts...//*"loads the Patron navigation property of each Checkout so that you have access to patron information associated with each checkout."
+    .Include(co => co.Material)
+    .ThenInclude(m => m.MaterialType) //"The ThenInclude method is used to specify a nested related property. It includes the MaterialType navigation property of each Material, which is nested under the Material navigation property."
+    .Where(co => // use where to filter all above results down to only those checkouts WHERE the checkout is beyond its due date (which is based on the checkoutdays property compared to how many days it has been out)
+    (DateTime.Today - co.CheckoutDate).Days >
+        co.Material.MaterialType.CheckoutDays &&
+        co.ReturnDate == null)
+        .ToList();
+});
+
+//overdue checkouts would include: patron, material, checkoutdate, returndate
 
 
 app.Run();
