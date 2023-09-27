@@ -26,16 +26,16 @@ public class LoncotesLibraryDbContext : DbContext // this is a subclass because 
             //* HasData - this method is from Entity Framework Core and it allows us to seed data for a database when we are initalizing or migrating a database
         modelBuilder.Entity<Checkout>().HasData(new Checkout[]
         {
-            new Checkout { Id = 1, MaterialId = 1, MaterialTypeId = 1, PatronId = 1, CheckoutDate = new DateTime(2023, 09, 25), ReturnDate = null },
-            new Checkout { Id = 2, MaterialId = 2, MaterialTypeId = 2, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-4)), ReturnDate = null },
-            new Checkout { Id = 3, MaterialId = 3, MaterialTypeId = 3, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-3)), ReturnDate = null },
-            new Checkout { Id = 4, MaterialId = 4, MaterialTypeId = 1, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-71)), ReturnDate = null },
-            new Checkout { Id = 5, MaterialId = 5, MaterialTypeId = 2, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-15)), ReturnDate = null },
-            new Checkout { Id = 6, MaterialId = 6, MaterialTypeId = 3, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-91)), ReturnDate = null },
-            new Checkout { Id = 7, MaterialId = 7, MaterialTypeId = 1, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-5)), ReturnDate = null },
-            new Checkout { Id = 8, MaterialId = 8, MaterialTypeId = 2, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-3)), ReturnDate = null },
-            new Checkout { Id = 9, MaterialId = 9, MaterialTypeId = 3, PatronId = 1, CheckoutDate = (DateTime.Now.AddDays(-5)), ReturnDate = null },
-            new Checkout { Id = 10, MaterialId = 10, MaterialTypeId = 1, PatronId = 2, CheckoutDate = (DateTime.Now.AddDays(-16)), ReturnDate = DateTime.Now },
+            new Checkout { Id = 1, MaterialId = 1, PatronId = 1, CheckoutDate = new DateTime(2023, 07, 25), ReturnDate = null }, // 30 days before late return
+            new Checkout { Id = 2, MaterialId = 2, PatronId = 2, CheckoutDate = new DateTime(2023, 08, 20), ReturnDate = null }, // 40 days before late return
+            new Checkout { Id = 3, MaterialId = 3, PatronId = 3, CheckoutDate = new DateTime(2023, 09, 18), ReturnDate = null }, // 30 days before late return
+            new Checkout { Id = 4, MaterialId = 4, PatronId = 4, CheckoutDate = new DateTime(2023, 09, 16), ReturnDate = null }, // this one was never checked out
+            // new Checkout { Id = 5, MaterialId = 5, PatronId = 1, CheckoutDate = new DateTime(2023, 09, 16), ReturnDate = DateTime.Now },
+            // new Checkout { Id = 6, MaterialId = 6, PatronId = 2, CheckoutDate = new DateTime(2023, 09, 15), ReturnDate = DateTime.Now },
+            // new Checkout { Id = 7, MaterialId = 7, PatronId = 3, CheckoutDate = new DateTime(2023, 09, 10), ReturnDate = DateTime.Now },
+            // new Checkout { Id = 8, MaterialId = 8, PatronId = 2, CheckoutDate = new DateTime(2023, 09, 08), ReturnDate = DateTime.Now },
+            // new Checkout { Id = 9, MaterialId = 9, PatronId = 1, CheckoutDate = new DateTime(2023, 09, 02), ReturnDate = new DateTime (2023, 09, 03) },
+            // new Checkout { Id = 10, MaterialId = 10, PatronId = 4, CheckoutDate = new DateTime(2023, 09, 01), ReturnDate = DateTime.Now },
         });
 
         //^ GENRE
@@ -75,7 +75,9 @@ public class LoncotesLibraryDbContext : DbContext // this is a subclass because 
         modelBuilder.Entity<Patron>().HasData(new Patron[]
         {
             new Patron { Id = 1, FirstName = "Clark", LastName = "Howard", Address = "123 Main St", Email = "clark@howard.com", IsActive = false},
-            new Patron { Id = 2, FirstName = "Howie", LastName = "Clarkerston", Address = "321 Branch St", Email = "howie@clarkerston.com", IsActive = true}
+            new Patron { Id = 2, FirstName = "Howie", LastName = "Clarkerston", Address = "321 Branch St", Email = "howie@clarkerston.com", IsActive = true},
+            new Patron { Id = 3, FirstName = "Mark", LastName = "Markly", Address = "100 Airpot Blvd", Email = "mark@markly.com", IsActive = true},
+            new Patron { Id = 4, FirstName = "Deion", LastName = "Sanderson", Address = "5th Street", Email = "deion@sanderson.com", IsActive = true}
         });
     }
 

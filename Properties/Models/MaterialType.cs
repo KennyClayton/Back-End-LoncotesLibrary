@@ -7,5 +7,5 @@ public class MaterialType
     [Required] // means that the below property is required to be non-nullable (ie - this value cannot be null)
     public string Name { get; set; }
     public int CheckoutDays { get; set; }
-    public Checkout Checkout { get; set; }
-} 
+    public List<Material> Materials { get; set; }
+}  
