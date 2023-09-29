@@ -91,7 +91,8 @@ namespace LoncotesLibrary.Migrations
                     MaterialId = table.Column<int>(type: "integer", nullable: false),
                     PatronId = table.Column<int>(type: "integer", nullable: false),
                     CheckoutDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    ReturnDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    Paid = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -149,26 +150,26 @@ namespace LoncotesLibrary.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "Book on Sports", 1, null },
-                    { 2, 2, "History Magazine", 2, new DateTime(2023, 8, 28, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5791) },
+                    { 2, 2, "History Magazine", 2, new DateTime(2023, 8, 30, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5906) },
                     { 3, 3, "Mathematics Textbook", 1, null },
-                    { 4, 4, "Sci-Fi CD", 3, new DateTime(2023, 9, 12, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5823) },
+                    { 4, 4, "Sci-Fi CD", 3, new DateTime(2023, 9, 14, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5935) },
                     { 5, 5, "Food Recipe Book", 1, null },
-                    { 6, 1, "Sports Biography", 1, new DateTime(2023, 7, 29, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5826) },
+                    { 6, 1, "Sports Biography", 1, new DateTime(2023, 7, 31, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5937) },
                     { 7, 3, "Mathematics Journal", 2, null },
-                    { 8, 4, "Sci-Fi Novel", 1, new DateTime(2023, 8, 13, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5828) },
+                    { 8, 4, "Sci-Fi Novel", 1, new DateTime(2023, 8, 15, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5939) },
                     { 9, 5, "Cooking Magazine", 2, null },
-                    { 10, 2, "History Textbook", 1, new DateTime(2023, 7, 14, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5830) }
+                    { 10, 2, "History Textbook", 1, new DateTime(2023, 7, 16, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5941) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Checkouts",
-                columns: new[] { "Id", "CheckoutDate", "MaterialId", "PatronId", "ReturnDate" },
+                columns: new[] { "Id", "CheckoutDate", "MaterialId", "Paid", "PatronId", "ReturnDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, null },
-                    { 2, new DateTime(2023, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, null },
-                    { 3, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, null },
-                    { 4, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, null }
+                    { 1, new DateTime(2023, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, false, 1, null },
+                    { 2, new DateTime(2023, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, false, 2, null },
+                    { 3, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, false, 3, null },
+                    { 4, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, false, 4, null }
                 });
 
             migrationBuilder.CreateIndex(

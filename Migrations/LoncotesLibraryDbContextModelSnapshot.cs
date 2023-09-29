@@ -35,6 +35,9 @@ namespace LoncotesLibrary.Migrations
                     b.Property<int>("MaterialId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Paid")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("PatronId")
                         .HasColumnType("integer");
 
@@ -55,6 +58,7 @@ namespace LoncotesLibrary.Migrations
                             Id = 1,
                             CheckoutDate = new DateTime(2023, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MaterialId = 1,
+                            Paid = false,
                             PatronId = 1
                         },
                         new
@@ -62,6 +66,7 @@ namespace LoncotesLibrary.Migrations
                             Id = 2,
                             CheckoutDate = new DateTime(2023, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MaterialId = 2,
+                            Paid = false,
                             PatronId = 2
                         },
                         new
@@ -69,6 +74,7 @@ namespace LoncotesLibrary.Migrations
                             Id = 3,
                             CheckoutDate = new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MaterialId = 3,
+                            Paid = false,
                             PatronId = 3
                         },
                         new
@@ -76,6 +82,7 @@ namespace LoncotesLibrary.Migrations
                             Id = 4,
                             CheckoutDate = new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MaterialId = 4,
+                            Paid = false,
                             PatronId = 4
                         });
                 });
@@ -167,7 +174,7 @@ namespace LoncotesLibrary.Migrations
                             GenreId = 2,
                             MaterialName = "History Magazine",
                             MaterialTypeId = 2,
-                            OutOfCirculationSince = new DateTime(2023, 8, 28, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5791)
+                            OutOfCirculationSince = new DateTime(2023, 8, 30, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5906)
                         },
                         new
                         {
@@ -182,7 +189,7 @@ namespace LoncotesLibrary.Migrations
                             GenreId = 4,
                             MaterialName = "Sci-Fi CD",
                             MaterialTypeId = 3,
-                            OutOfCirculationSince = new DateTime(2023, 9, 12, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5823)
+                            OutOfCirculationSince = new DateTime(2023, 9, 14, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5935)
                         },
                         new
                         {
@@ -197,7 +204,7 @@ namespace LoncotesLibrary.Migrations
                             GenreId = 1,
                             MaterialName = "Sports Biography",
                             MaterialTypeId = 1,
-                            OutOfCirculationSince = new DateTime(2023, 7, 29, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5826)
+                            OutOfCirculationSince = new DateTime(2023, 7, 31, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5937)
                         },
                         new
                         {
@@ -212,7 +219,7 @@ namespace LoncotesLibrary.Migrations
                             GenreId = 4,
                             MaterialName = "Sci-Fi Novel",
                             MaterialTypeId = 1,
-                            OutOfCirculationSince = new DateTime(2023, 8, 13, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5828)
+                            OutOfCirculationSince = new DateTime(2023, 8, 15, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5939)
                         },
                         new
                         {
@@ -227,7 +234,7 @@ namespace LoncotesLibrary.Migrations
                             GenreId = 2,
                             MaterialName = "History Textbook",
                             MaterialTypeId = 1,
-                            OutOfCirculationSince = new DateTime(2023, 7, 14, 14, 38, 7, 685, DateTimeKind.Local).AddTicks(5830)
+                            OutOfCirculationSince = new DateTime(2023, 7, 16, 10, 29, 19, 949, DateTimeKind.Local).AddTicks(5941)
                         });
                 });
 

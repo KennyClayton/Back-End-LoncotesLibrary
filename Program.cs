@@ -48,38 +48,54 @@ app.UseHttpsRedirection();
 // });
 
 
-//^ ENDPOINT - Get Materials by Genre and/or MaterialType
-// The librarians also like to search for materials by genre and type. Add query string parameters to the above endpoint for materialTypeId and genreId. Update the logic of the above endpoint to include both, either, or neither of these filters, depending which are passed in. Remember, query string parameters are always optional when making an HTTP request, so you have to account for the possibility that any of them will be missing.
-app.MapGet("/api/materials", async (LoncotesLibraryDbContext db, int? materialTypeId, int? genreId) =>
+
+
+//^ FRONT END - GET all materials in circulation
+
+app.MapGet("/api/materials", (LoncotesLibraryDbContext db, int? materialTypeId, int? genreId) => 
 {
-    // Start with a base query to retrieve all materials.
-    var query = db.Materials.AsQueryable(); // AsQueryable "prepares the data source for further filtering, projection, and other operations that you might want to perform using LINQ."
-    query = query.Where(material => material.OutOfCirculationSince == null || material.OutOfCirculationSince > DateTime.Now);
-    // Apply filters if materialTypeId is provided.
-    if (materialTypeId.HasValue)
-    {
-        query = query.Where(material => material.MaterialTypeId == materialTypeId.Value);
-    }
+    List<Material>materials = db.Materials
+    .Include(m => m.Genre)
+    .Include(m => m.MaterialType)
+    .Where(m => m.OutOfCirculationSince == null)
+    .ToList(); //store the table/list of material instances in a List called "materials"
 
-    // Apply filters if genreId is provided.
-    if (genreId.HasValue)
-    {
-        query = query.Where(material => material.GenreId == genreId.Value);
-    }
-
-    // Execute the final query and return the results.
-    var materials = await query.ToListAsync();
-
-    // Return the materials as JSON.
     return Results.Ok(materials);
 });
+
+
+
+
+
+//^ ENDPOINT - BACK END VERSION - Get Materials by Genre and/or MaterialType
+// The librarians also like to search for materials by genre and type. Add query string parameters to the above endpoint for materialTypeId and genreId. Update the logic of the above endpoint to include both, either, or neither of these filters, depending which are passed in. Remember, query string parameters are always optional when making an HTTP request, so you have to account for the possibility that any of them will be missing.
+// app.MapGet("/api/materials", (LoncotesLibraryDbContext db, int? materialTypeId, int? genreId) =>
+// {
+//     // Start with a base query to retrieve all materials.
+//     var query = db.Materials.AsQueryable(); // AsQueryable "prepares the data source for further filtering, projection, and other operations that you might want to perform using LINQ."
+//     query = query.Where(material => material.OutOfCirculationSince == null || material.OutOfCirculationSince > DateTime.Now);
+//     // Apply filters if materialTypeId is provided.
+//     if (materialTypeId.HasValue)
+//     {
+//         query = query.Where(material => material.MaterialTypeId == materialTypeId.Value);
+//     }
+//     // Apply filters if genreId is provided.
+//     if (genreId.HasValue)
+//     {
+//         query = query.Where(material => material.GenreId == genreId.Value);
+//     }
+//     // Execute the final query and return the results.
+//     var materials = query.ToListAsync();
+//     // Return the materials as JSON.
+//     return Results.Ok(materials);
+// });
 
 
 //^ ENDPOINT - Get all materials (with their genre and material type) that are currently available (not checked out, and not removed from circulation). A checked out material will have a related checkout that has a ReturnDate of null.
 app.MapGet("/api/materials/available", (LoncotesLibraryDbContext db) =>
 {
     return db.Materials
-    // .Include(m => m.Genre)
+    .Include(m => m.Genre)
     .Where(m => m.OutOfCirculationSince == null)
     .Where(m => m.Checkouts.All(co => co.ReturnDate != null)) // "The second Where says "only return materials where all of the material's checkouts have a value for ReturnDate"
     .ToList();
@@ -90,7 +106,7 @@ app.MapGet("/api/materials/available", (LoncotesLibraryDbContext db) =>
 // The librarians would like to see details for a material. Include the Genre, MaterialType, and Checkouts (as well as the Patron associated with each checkout using ThenInclude).
 app.MapGet("/api/materials/{id}", (LoncotesLibraryDbContext db, int id) =>
 {
-    var material = db.Materials
+    Material material = db.Materials
     .Where(m => m.Id == id)
     .Include(m => m.Genre)
     .Include(m => m.MaterialType)

@@ -46,7 +46,7 @@ public class LoncotesLibraryDbContext : DbContext // this is a subclass because 
             new Genre { Id = 3, Name = "Mathematics" },
             new Genre { Id = 4, Name = "Sci-Fi" },
             new Genre { Id = 5, Name = "Food" }
-        });
+        }); 
 
         //^ MATERIAL
         modelBuilder.Entity<Material>().HasData(new Material[]

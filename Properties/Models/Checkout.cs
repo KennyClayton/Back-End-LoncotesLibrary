@@ -18,7 +18,7 @@ public class Checkout
     public bool Paid { get; set; } // Add a Paid property of type bool to the Checkout class that indicates whether a fee has been paid or not.
 
     private static decimal _lateFeePerDay = 0.50M; // "The static keyword makes the _lateFeePerDay field belong to the class itself rather than an instance of the class. This means all instances of the Checkout class will share the same _lateFeePerDay value, which is what you likely intend for the late fee per day. Additionally, I changed the value from .50M to 0.50M for clarity; both represent 50 cents but using 0.50M makes it more explicit that it's a decimal value."
-
+ 
     public decimal? LateFee
     {
         get

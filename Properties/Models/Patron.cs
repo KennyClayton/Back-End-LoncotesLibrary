@@ -16,17 +16,24 @@ public class Patron
     public bool IsActive { get; set; }
     public List<Checkout> Checkouts { get; set; }
 
-    public decimal Balance
+    public decimal? Balance // to get a patron's balance we need to know if the patron has any overdue books. To know if it has any overdue books we have to compare the checkoutDays to the checkout today compared to today. Then we find tht difference and if it's over the checkoutDays limit then they should be charged a fee.
     {
         get
         {
-            // Calculate the total unpaid fines by summing up the late fees for each checkout.
-            decimal totalUnpaidFines = Checkouts //start with list of checkouts and then...
-                .Where(co => co.LateFee.HasValue) // ...filter checkouts with late fees...and then...
-                .Sum(co => co.LateFee.Value); // ...sum the late fees.
+            if (Checkouts != null) // first, if the patron has any checkouts at all, do this...
+            {
+                decimal totalLateFees = 0; //initialize totalLateFees at zero...
 
-            return totalUnpaidFines;
+                foreach (var checkout in Checkouts) //...and for each checkout instance in the checkouts list for this Patron //#REMEMBER! we are sitting in the Patron class right now, so this code is checking against a single Patron instance right now...
+                {
+                    if (!checkout.Paid && checkout.LateFee.HasValue) //...if both conditions are true, that the checkout paid property is false AND the late fee property has a value at all...then...
+                    {
+                        totalLateFees += checkout.LateFee.Value; //... add the totalLateFees above to the value of the LateFee property
+                    }
+                }
+                return totalLateFees;
+            }
+            return null; //otherwise, return null if there is no checkout for this Patron
         }
-
     }
 } 
